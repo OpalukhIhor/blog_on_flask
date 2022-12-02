@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!-- ADAPTIVE -->
+    <meta name="viewport" content="width=device-width">
+<!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<!-- PAGE TITLE -->
+    {% block title %}
+        {% if title %}
+            <title>{{ title }} | Flask</title>
+        {% else %}
+            <title>Main | Flask</title>
+        {% endif %}
+    {% endblock %}
+</head>
+<body>
+<!-- PAGE BODY -->
+    <div class="wrapper">
+<!-- HEADER -->
+        {% block header %}
+            <header class="header">
+                <a href="#" class="header__logo">FLASK</a>
+                <nav class="header__menu">
+                    <ul class="header__list">
+                        <li><a href="#" class="header__link">Main</a></li>
+                        <li><a href="#" class="header__link">Posts</a></li>
+                        <li><a href="#" class="header__link">Account</a></li>
+                        <li><a href="#" class="header__link">Login</a></li>
+                    </ul>
+                </nav>
+            </header>
+        {% endblock %}
+
+<!-- MAIN -->
+        {% block content %}
+            <main class="main">
+                <section class="content">
+
+                </section>
+            </main>
+        {% endblock %}
+
+<!-- FOOTER -->
+        {% block footer %}
+            <footer class="footer">
+                <div class="footer__copy">
+                    by Йорцьо | 202_
+                </div>
+                <div class="footer__text">
+                    Слава Україні!
+                </div>
+            </footer>
+        {% endblock %}
+    </div>
+</body>
+</html>
