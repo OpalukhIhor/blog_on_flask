@@ -5,13 +5,11 @@
 <!-- ADAPTIVE -->
     <meta name="viewport" content="width=device-width">
 <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
 <!-- PAGE TITLE -->
     {% block title %}
         {% if title %}
-            <title>{{ title }} | Flask</title>
-        {% else %}
-            <title>Main | Flask</title>
+            <title>{{ title }} | Flask</title>{% else %}<title>Flask blog</title>
         {% endif %}
     {% endblock %}
 </head>
@@ -24,21 +22,36 @@
                 <a href="#" class="header__logo">FLASK</a>
                 <nav class="header__menu">
                     <ul class="header__list">
-                        <li><a href="#" class="header__link">Main</a></li>
-                        <li><a href="#" class="header__link">Posts</a></li>
-                        <li><a href="#" class="header__link">Account</a></li>
-                        <li><a href="#" class="header__link">Login</a></li>
+                        {% if current_user.is_authenticated %}
+                            <li><a href="{{ url_for('main.index') }}" class="header__link">Main</a></li>
+                            <li><a href="{{ url_for('post.posts_list') }}" class="header__link">Posts</a></li>
+                            <li><a href="{{ url_for('post.new_post') }}" class="header__link">Add Post</a></li>
+                            <li><a href="{{ url_for('auth.account') }}" class="header__link">Account</a></li>
+                            <li><a href="{{ url_for('auth.login') }}" class="header__link">Login</a></li>
+                            <li><a href="{{ url_for('auth.logout') }}" class="header__link">Logout</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('main.index') }}" class="header__link">Main</a></li>
+                            <li><a href="{{ url_for('post.posts_list') }}" class="header__link">Posts</a></li>
+                            <li><a href="{{ url_for('auth.login') }}" class="header__link">Login</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </header>
         {% endblock %}
 
 <!-- MAIN -->
+            <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <span>{{ message }}</span>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         {% block content %}
             <main class="main">
-                <section class="content">
 
-                </section>
             </main>
         {% endblock %}
 
