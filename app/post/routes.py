@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, current_app
 from flask_login import current_user, login_required
 
 from app import db
@@ -29,6 +29,9 @@ def post(post_id):
 
 @bp.route('/posts_list')
 def posts_list():
+    # Set the pagination configuration
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page, per_page=5)
+    posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page,
+                                                                 per_page=current_app.config['POSTS_PER_PAGE'],
+                                                                 error_out=False)
     return render_template('post/posts_list.html', title='Posts', posts=posts)

@@ -26,13 +26,12 @@
                             <li><a href="{{ url_for('main.index') }}" class="header__link">Main</a></li>
                             <li><a href="{{ url_for('post.posts_list') }}" class="header__link">Posts</a></li>
                             <li><a href="{{ url_for('post.new_post') }}" class="header__link">Add Post</a></li>
-                            <li><a href="{{ url_for('auth.account') }}" class="header__link">Account</a></li>
-                            <li><a href="{{ url_for('auth.login') }}" class="header__link">Login</a></li>
-                            <li><a href="{{ url_for('auth.logout') }}" class="header__link">Logout</a></li>
+                            <li><a href="{{ url_for('user.account') }}" class="header__link">Account</a></li>
+                            <li><a href="{{ url_for('user.logout') }}" class="header__link">Logout</a></li>
                         {% else %}
                             <li><a href="{{ url_for('main.index') }}" class="header__link">Main</a></li>
                             <li><a href="{{ url_for('post.posts_list') }}" class="header__link">Posts</a></li>
-                            <li><a href="{{ url_for('auth.login') }}" class="header__link">Login</a></li>
+                            <li><a href="{{ url_for('user.login') }}" class="header__link">Login</a></li>
                         {% endif %}
                     </ul>
                 </nav>

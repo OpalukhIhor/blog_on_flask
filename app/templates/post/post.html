@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a  href="{{ url_for('auth.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+    <a  href="{{ url_for('user.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
     <small class="text-muted">{{ post.created_at.strftime('%d.%m.%Y-%H.%M') }}</small>
     <h3><a href="#"></a>{{ post.title }}</h3>
     {{ post.content }}

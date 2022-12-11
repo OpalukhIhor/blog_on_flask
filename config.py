@@ -11,4 +11,11 @@ class Config(object):
     SECRET_KEY = os.urandom(36) or 'to-long-pass-for-understanding'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATION = False
-    POST_PER_PAGE = 4
+    POSTS_PER_PAGE = 4
+    MAIL_USERNAME = os.environ.get('MAIL_USER')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+# Settings from Google -> help
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USR_SSL = True
