@@ -8,12 +8,13 @@ from app.post.forms import AddPostForm
 
 
 @bp.route('/post/new', methods=['GET', 'POST'])
-@login_required
 def new_post():
     form = AddPostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Post(title=form.title.data, content=form.content.data,
+                    category=form.category.data, author=current_user)
         db.session.add(post)
+
         db.session.commit()
         flash('Post added')
         return redirect(url_for('post.posts_list'))
@@ -23,7 +24,7 @@ def new_post():
 @bp.route('/post/<int:post_id>')
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    #page = request.args.get('page', type=int)
+
     return render_template('post/post.html', title=post.title, post=post)
 
 
@@ -35,3 +36,20 @@ def posts_list():
                                                                  per_page=current_app.config['POSTS_PER_PAGE'],
                                                                  error_out=False)
     return render_template('post/posts_list.html', title='Posts', posts=posts)
+
+
+@bp.route('/search')
+def search():
+    keyword = request.args.get('q')
+    search_result = Post.query.msearch(keyword, fields=['title', 'content'], limit=5)
+    return render_template('post/search.html', search_result=search_result)
+
+
+@bp.route('/posts/<string:category>/', methods=['GET', 'POST'])
+def category(category):
+    current_category = Post.query.filter_by(category=category).first()
+    posts_category = Post.query.filter_by(category=category).all()
+    return render_template('post/posts_category_list.html',current_category=current_category,
+                           posts_category=posts_category, title='Category ' + category)
+
+

@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_migrate import Migrate
+from flask_msearch import Search
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
@@ -14,6 +16,10 @@ login = LoginManager()
 login.login_view = 'user.login'
 login.login_message = 'Please log in to access this page.'
 
+mail = Mail()
+
+search = Search()
+
 
 # Application Factory
 def create_app(config_class=Config):
@@ -24,6 +30,10 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
 
     login.init_app(app)
+
+    mail.init_app(app)
+
+    search.init_app(app)
 
 
 #  Register Blueprints

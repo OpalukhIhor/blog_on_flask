@@ -5,7 +5,7 @@
 <!-- ADAPTIVE -->
     <meta name="viewport" content="width=device-width">
 <!-- CSS -->
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <!-- PAGE TITLE -->
     {% block title %}
         {% if title %}
@@ -39,20 +39,25 @@
         {% endblock %}
 
 <!-- MAIN -->
-            <!-- flash messages -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <span>{{ message }}</span>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-
-        {% block content %}
             <main class="main">
+                <div class="search">
+                    <form action="{{ url_for('post.search') }}" method="get">
+                        <input type="text" class="search" name="q" placeholder="Keywords...">
+                        <input type="submit" value="search">
+                    </form>
+                </div>
+                <!-- flash messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <span>{{ message }}</span>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+                {% block content %}
 
+                {% endblock %}
             </main>
-        {% endblock %}
 
 <!-- FOOTER -->
         {% block footer %}

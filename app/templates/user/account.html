@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="wrapper">
+<div class="account">
+    <div class="account__header">
         <h1>You sign in as {{ current_user.username }}</h1>
-            If it's not your account, please <a href="{{ url_for('user.logout') }}">logout</a>.
+        <p>If it's not your account, please <a href="{{ url_for('user.logout') }}">logout</a>.
             And sign in with your personal data
+        </p>
+    </div>
+    <div class="account__body">
         <div class="all__users">
             <h2>Users list:</h2>
             <ul>
                 {% for user in users %}
-                    <li><a href="{{ url_for('user.user_posts', username=user.username) }}">{{ user.username }}</a></li>
+                <li><a href="{{ url_for('user.user_posts', username=user.username) }}">{{ user.username }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -17,36 +21,39 @@
             <h2>Posts list:</h2>
             <ol>
                 {% for post in user.posts %}
-                    <li><a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a></li>
+                <li><a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a></li>
                 {% endfor %}
             </ol>
         </div>
-        <div class="user__info">
-            {% if current_user.is_authenticated %}
-            <h2>Please find your profile below:</h2>
-            <p><span>Name: </span>{{ current_user.username }}</p>
-            <p><span>Email: </span>{{ current_user.email }}</p>
-            <p><span>Last seen: </span>{{ current_user.last_seen }}</p>
-        {% endif %}
-        </div>
-        <div class="updater">
-            <form action="" method="post" enctype="multipart/form-data">
-                {{ form.hidden_tag() }}
-                <p>
-                    {{ form.username.label }} <br>
-                    {{ form.username(size=32) }}
-                    {% for error in form.username.errors %}
-                        <span style="color:red">{{ error }}</span>
-                    {% endfor %}
-                </p>
-                <p>
-                    {{ form.email.label }} <br>
-                    {{ form.email(size=32) }}
-                    {% for error in form.email.errors %}
-                        <span style="color:red">{{ error }}</span>
-                    {% endfor %}
-                <p>{{ form.submit() }}</p>
-            </form>
+        <div class="user__profile">
+            <div class="user__info">
+                {% if current_user.is_authenticated %}
+                <h2>Your profile:</h2>
+                <p><span>Name: </span>{{ current_user.username }}</p>
+                <p><span>Email: </span>{{ current_user.email }}</p>
+                <p><span>Last seen: </span>{{ current_user.last_seen }}</p>
+                {% endif %}
+            </div>
+<!--            <div class="updater">-->
+<!--                <form action="" method="post" enctype="multipart/form-data">-->
+<!--                    {{ form.hidden_tag() }}-->
+<!--                    <p>-->
+<!--                        {{ form.username.label }} <br>-->
+<!--                        {{ form.username(size=32) }}-->
+<!--                        {% for error in form.username.errors %}-->
+<!--                        <span style="color:red">{{ error }}</span>-->
+<!--                        {% endfor %}-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        {{ form.email.label }} <br>-->
+<!--                        {{ form.email(size=32) }}-->
+<!--                        {% for error in form.email.errors %}-->
+<!--                        <span style="color:red">{{ error }}</span>-->
+<!--                        {% endfor %}-->
+<!--                    <p>{{ form.submit() }}</p>-->
+<!--                </form>-->
+<!--            </div>-->
         </div>
     </div>
-{% endblock %}
+</div>
+    {% endblock %}

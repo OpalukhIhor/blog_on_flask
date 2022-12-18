@@ -1,39 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="post_container">
     <h1>{{ user.username }}'s posts ({{posts.total}})</h1>
     {% for post in posts.items %}
-        <p><a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a>
-        <small>({{ post.created_at.strftime('%d.%m.%Y-%H.%M') }})</small></p>
-        <p>{{ post.content }}</p>
-    {% endfor %}
-<!-- Pagination Links-->
-    <div class="pagination">
-        <a href="{{ url_for('post.posts_list', page=posts.perv_num) }}"
-           class="btn btn-outline-dark
-           {% if posts.page == 1 %}disabled{% endif %}">
-            &laquo;
-        </a>
-<!-- Loop through the number of pages to display a link for each-->
-        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-            {% if page_num %}
-    <!-- Check for the active page and set the link to "Active"-->
-                {% if posts.page == page_num %}
-                    <a href="{{ url_for('post.posts_list', page=page_num) }}" class="btn btn-dark">
-                        {{ page_num }}
-                    </a>
-                {% else %}
-                    <a href="{{ url_for('post.posts_list', page=page_num) }}">
-                        {{ page_num }}
-                    </a>
-                {% endif %}
-            {% else %}
-                ...
-            {% endif %}
-        {% endfor %}
-        <a href="{{ url_for('post.posts_list', page=posts.next_num) }}" class="btn btn-outline-dark
-            {% if posts.page == posts.pages %}disabled{% endif %}">
-            &raquo;
-        </a>
+    <div class="user_posts">
+        <a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a>
+        <small>({{ post.created_at.strftime('%d.%m.%Y-%H.%M') }})</small>
+        <p>{{ post.content | truncate(500, True) }}</p>
     </div>
+    {% endfor %}
+</div>
+
+
+<!-- Pagination Links-->
+<div class="pagination">
+    <a href="{{ url_for('post.posts_list', page=posts.perv_num) }}"
+       class="btn btn-outline-dark
+           {% if posts.page == 1 %}disabled{% endif %}">
+        &laquo;
+    </a>
+    <!-- Loop through the number of pages to display a link for each-->
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    <!-- Check for the active page and set the link to "Active"-->
+    {% if posts.page == page_num %}
+    <a href="{{ url_for('post.posts_list', page=page_num) }}" class="btn btn-dark">
+        {{ page_num }}
+    </a>
+    {% else %}
+    <a href="{{ url_for('post.posts_list', page=page_num) }}">
+        {{ page_num }}
+    </a>
+    {% endif %}
+    {% else %}
+    ...
+    {% endif %}
+    {% endfor %}
+    <a href="{{ url_for('post.posts_list', page=posts.next_num) }}" class="btn btn-outline-dark
+            {% if posts.page == posts.pages %}disabled{% endif %}">
+        &raquo;
+    </a>
+</div>
 {% endblock %}

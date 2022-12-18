@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="posts_category_list">
+    <h1>Category: {{ current_category.category }}</h1>
+    <div class="category_list">
+            {% for post in posts_category %}
+            <li><a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a></li>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}
