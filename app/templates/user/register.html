@@ -7,27 +7,15 @@
         {{ form.hidden_tag() }}  <!-- SecretKey field -->
         <p>
             {{ form.username(size=32, placeholder="Username") }}
-            {% for error in form.username.errors %}
-            <span style="color:red">{{ error }}</span>
-            {% endfor %}
         </p>
         <p>
             {{ form.email(size=32, placeholder="Email") }}
-            {% for error in form.email.errors %}
-            <span style="color:red">{{ error }}</span>
-            {% endfor %}
         </p>
         <p>
             {{ form.password(size=32, placeholder="Password") }}
-            {% for error in form.password.errors %}
-            <span style="color:red">{{ error }}</span>
-            {% endfor %}
         </p>
         <p>
             {{ form.confirm_password(size=32, placeholder="Confirm Password") }}
-            {% for error in form.confirm_password.errors %}
-            <span style="color:red">{{ error }}</span>
-            {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>

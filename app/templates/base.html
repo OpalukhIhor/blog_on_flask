@@ -47,10 +47,10 @@
                     </form>
                 </div>
                 <!-- flash messages -->
-            {% with messages = get_flashed_messages() %}
+            {% with messages = get_flashed_messages(True) %}
                 {% if messages %}
-                    {% for message in messages %}
-                        <span>{{ message }}</span>
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}

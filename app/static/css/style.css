@@ -75,10 +75,24 @@ ul {list-style: none;}
 	}
 }
 
+/* FLESHES */
+.flash {
+    padding: 10px;
+    margin: 10px 100px;
+}
+.flash.success {
+    border: solid 1px #21DB56;
+    background: #AEFFC5;
+}
+.flash.error {
+    border: solid 1px #FF4343;
+    background: #FF9C9C;
+}
+
 /* SEARCH */
 .search {
     text-align: right;
-    margin: 0px 50px;
+    margin: 0px 50px 20px 0px;
 }
 .search input[type="text"] {
   background: transparent;
@@ -488,7 +502,7 @@ ul {list-style: none;}
   display: block;
   background: rgba(200,200,200,.1);
   width: 300px;
-  height: 500px;
+  height: 200px;
   margin: 0 auto;
   position: relative;
   top: 19px;
@@ -621,7 +635,7 @@ ul {list-style: none;}
 .post {
   background: rgba(200,200,200,.1);
   width: 1200px;
-  height: 140px;
+  height: 160px;
   margin: 0 auto;
   margin-bottom: 10px;
   padding: 10px;
@@ -632,7 +646,26 @@ ul {list-style: none;}
   border-bottom: 0;
   box-shadow: 0 0 3px rgba(0,0,0,.7);
 }
-
+.delete__post button {
+  width: 60px;
+  margin: 10px;
+  background: rgba(111, 135, 117, .5);
+  border-radius: 5px;
+  border:0;
+  cursor: pointer;
+  border-top: 1px solid #B2ECE6;
+  box-shadow: 0 0 0 1px #363d38, 0 2px 2px #000000;
+  color: #FFFFFF;
+  font-size: 14px;
+  text-shadow: 0 1px 2px #21756A;
+}
+.delete__post button:hover{
+ background: linear-gradient(to bottom, rgba(81, 102, 97,1) 0%,rgba(57,175,154,1) 100%);
+}
+.delete__post button:active{
+  box-shadow: inset 0 0 5px #000;
+  background: linear-gradient(to bottom, rgba(57,175,154,1) 0%,rgba(81, 102, 97,1) 100%);
+}
 /* USERS_POST */
 .users_post {
   background: rgba(200,200,200,.1);

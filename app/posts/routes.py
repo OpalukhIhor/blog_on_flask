@@ -18,7 +18,7 @@ def new_post():
         db.session.add(post)
         post.slug = slugify(post.title)
         db.session.commit()
-        flash('Post added')
+        flash('Post added', category='success')
         return redirect(url_for('posts.posts_list'))
     return render_template('post/add_post.html', title='Add Post', form=form)
 

@@ -2,12 +2,10 @@ from datetime import datetime
 
 from flask import current_app
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer as Serializer
 
 from app import db, login
-
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,7 +39,6 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f'User({self.username}, {self.email}, {self.password})'
-
 
 
 # Search and pass user to LoginManager

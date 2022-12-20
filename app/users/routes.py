@@ -19,7 +19,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', category='error')
             return redirect(url_for('users.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next_page')
@@ -45,7 +45,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Success! Your account has been registered')
+        flash('Success! Your account has been registered', category='success')
         return redirect(url_for('users.login'))
     return render_template('user/register.html', title='Registration', form=form)
 
@@ -66,7 +66,7 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('Success! Your account has been edited')
+        flash('Success! Your account has been edited', category='success')
         return redirect(url_for('users.account'))
     current_user.last_seen = datetime.now()
     return render_template('user/account.html', title='Account', form=form, user=user, post=post, users=users)
@@ -89,7 +89,7 @@ def request_user_password():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('from Microblog')
+        flash('from Microblog', category='success')
         return redirect(url_for('users.login'))
     return render_template('user/reset_request.html', title='Reset password', form=form)
 
@@ -109,12 +109,12 @@ def reset_token(token):
         return redirect(url_for('main.index'))
     user = User.varify_reset_token(token)
     if user is None:
-        flash('Bed token')
+        flash('Bed token', category='error')
         return redirect(url_for('users.request_user_password'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash('Your password has been reset.', category='success')
         return redirect(url_for('users.login'))
     return render_template('user/reset_password.html', form=form)
