@@ -6,8 +6,8 @@ from flask_mail import Message
 from werkzeug.urls import url_parse
 
 from app import db, mail
-from app.user import bp
-from app.user.forms import LoginForm, RegisterForm, EditAccountForm, ResetRequestForm, ResetPasswordForm
+from app.users import bp
+from app.users.forms import LoginForm, RegisterForm, EditAccountForm, ResetRequestForm, ResetPasswordForm
 from app.models import User, Post
 
 
@@ -20,11 +20,11 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('user.login'))
+            return redirect(url_for('users.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next_page')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('user.account')
+            next_page = url_for('users.account')
         return redirect(next_page)
     return render_template('user/login.html', title='Sign In', form=form)
 
@@ -46,7 +46,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Success! Your account has been registered')
-        return redirect(url_for('user.login'))
+        return redirect(url_for('users.login'))
     return render_template('user/register.html', title='Registration', form=form)
 
 
@@ -67,7 +67,7 @@ def account():
         current_user.email = form.email.data
         db.session.commit()
         flash('Success! Your account has been edited')
-        return redirect(url_for('user.account'))
+        return redirect(url_for('users.account'))
     current_user.last_seen = datetime.now()
     return render_template('user/account.html', title='Account', form=form, user=user, post=post, users=users)
 
@@ -90,7 +90,7 @@ def request_user_password():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash('from Microblog')
-        return redirect(url_for('user.login'))
+        return redirect(url_for('users.login'))
     return render_template('user/reset_request.html', title='Reset password', form=form)
 
 
@@ -98,7 +98,7 @@ def send_reset_email(user):
     token = user.get_reset_token()
     message = Message('Request a new password', sender='noreply@demo.com', recipients=[user.email])
     message_text = f"""You have requested a new password for your account:
-                        {url_for('user.reset_token', token=token, _external=True)}
+                        {url_for('users.reset_token', token=token, _external=True)}
                         If you didn't do request, just ignore this message"""
     mail.send(message)
 
@@ -110,11 +110,11 @@ def reset_token(token):
     user = User.varify_reset_token(token)
     if user is None:
         flash('Bed token')
-        return redirect(url_for('user.request_user_password'))
+        return redirect(url_for('users.request_user_password'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
         flash('Your password has been reset.')
-        return redirect(url_for('user.login'))
+        return redirect(url_for('users.login'))
     return render_template('user/reset_password.html', form=form)

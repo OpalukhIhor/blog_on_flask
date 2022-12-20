@@ -3,7 +3,7 @@
 {% block content %}
 <div class="register__form">
     <h1>Registration</h1>
-    <form action="{{ url_for('user.register') }}" method="post" novalidate>
+    <form action="{{ url_for('users.register') }}" method="post" novalidate>
         {{ form.hidden_tag() }}  <!-- SecretKey field -->
         <p>
             {{ form.username(size=32, placeholder="Username") }}

@@ -3,11 +3,11 @@
 {% block content %}
 <div class="users_post">
     <div class="author">
-        <a  href="{{ url_for('user.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+        <a  href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
         <small class="text-muted">{{ post.created_at.strftime('%d.%m.%Y-%H.%M') }}</small>
     </div>
-    <a  href="{{ url_for('post.category', category=post.category) }}">{{ post.category }}</a>
-    <h3><a href="#"></a>{{ post.title }}</h3>
+    <a  href="{{ url_for('posts.category', category=post.category) }}">{{ post.category }}</a>
+    <h3><a href="{{ url_for('posts.post', slug=post.slug) }}"></a>{{ post.title }}</h3>
     {{ post.content }}
 </div>
 {% endblock %}

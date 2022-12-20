@@ -56,6 +56,7 @@ class Post(db.Model):
     title = db.Column(db.String(250), unique=True)
     content = db.Column(db.Text())
     category = db.Column(db.String(100))
+    slug = db.Column(db.String(), unique=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="add-post__form">
     <h1>Add new post</h1>
-    <form action="{{ url_for('post.new_post') }}" method="post" novalidate>
+    <form action="{{ url_for('posts.new_post') }}" method="post" novalidate>
         {{ form.hidden_tag() }}  <!-- SecretKey field -->
         <p>
             {{ form.title(size=32, placeholder="Title") }}

@@ -6,7 +6,7 @@
     <ol>
         {% for post in name_tags %}
         <li>
-            <a href="{{ url_for('post.post', post_id=post.tag_post.id) }}">{{ post.tag_post.title }}</a>
+            <a href="{{ url_for('posts.post', post_id=post.tag_post.id) }}">{{ post.tag_post.title }}</a>
         {{ post.tag_post.author.username }}</li>
         {% endfor %}
     </ol>

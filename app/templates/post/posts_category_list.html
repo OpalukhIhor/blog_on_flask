@@ -5,7 +5,7 @@
     <h1>Category: {{ current_category.category }}</h1>
     <div class="category_list">
             {% for post in posts_category %}
-            <li><a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a></li>
+            <li><a href="{{ url_for('posts.post', slug=post.slug) }}">{{ post.title }}</a></li>
             {% endfor %}
     </div>
 </div>

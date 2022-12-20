@@ -4,10 +4,10 @@
 <div class="posts__container">
     {% for post in posts.items %}
     <div class="post">
-        <a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a>
-            by <a href="{{ url_for('user.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>.
+        <a href="{{ url_for('posts.post', slug=post.slug) }}">{{ post.title }}</a>
+            by <a href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>.
         <p>
-            <a href="{{ url_for('post.category', category=post.category) }}">{{ post.category }}</a>
+            <a href="{{ url_for('posts.category', category=post.category) }}">{{ post.category }}</a>
         </p>
         <p>{{ post.content | truncate(500, True) }}</p>
     </div>
@@ -15,7 +15,7 @@
 </div>
 <!-- Pagination Links-->
 <div class="pagination">
-    <a href="{{ url_for('post.posts_list', page=posts.prev_num) }}"
+    <a href="{{ url_for('posts.posts_list', page=posts.prev_num) }}"
        class="{% if posts.page == 1 %}disabled{% endif %}">
         &laquo;
     </a>
@@ -24,11 +24,11 @@
     {% if page_num %}
     <!-- Check for the active page and set the link to "Active"-->
     {% if posts.page == page_num %}
-    <a href="{{ url_for('post.posts_list', page=page_num) }}">
+    <a href="{{ url_for('posts.posts_list', page=page_num) }}">
         {{ page_num }}
     </a>
     {% else %}
-    <a href="{{ url_for('post.posts_list', page=page_num) }}">
+    <a href="{{ url_for('posts.posts_list', page=page_num) }}">
         {{ page_num }}
     </a>
     {% endif %}
@@ -36,7 +36,7 @@
     ...
     {% endif %}
     {% endfor %}
-    <a href="{{ url_for('post.posts_list', page=posts.next_num) }}"
+    <a href="{{ url_for('posts.posts_list', page=posts.next_num) }}"
        class="{% if posts.page == posts.pages %}disabled{% endif %}">
         &raquo;
     </a>

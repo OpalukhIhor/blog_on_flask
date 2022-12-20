@@ -24,14 +24,14 @@
                     <ul class="header__list">
                         {% if current_user.is_authenticated %}
                             <li><a href="{{ url_for('main.index') }}" class="header__link">Main</a></li>
-                            <li><a href="{{ url_for('post.posts_list') }}" class="header__link">Posts</a></li>
-                            <li><a href="{{ url_for('post.new_post') }}" class="header__link">Add Post</a></li>
-                            <li><a href="{{ url_for('user.account') }}" class="header__link">Account</a></li>
-                            <li><a href="{{ url_for('user.logout') }}" class="header__link">Logout</a></li>
+                            <li><a href="{{ url_for('posts.posts_list') }}" class="header__link">Posts</a></li>
+                            <li><a href="{{ url_for('posts.new_post') }}" class="header__link">Add Post</a></li>
+                            <li><a href="{{ url_for('users.account') }}" class="header__link">Account</a></li>
+                            <li><a href="{{ url_for('users.logout') }}" class="header__link">Logout</a></li>
                         {% else %}
                             <li><a href="{{ url_for('main.index') }}" class="header__link">Main</a></li>
-                            <li><a href="{{ url_for('post.posts_list') }}" class="header__link">Posts</a></li>
-                            <li><a href="{{ url_for('user.login') }}" class="header__link">Login</a></li>
+                            <li><a href="{{ url_for('posts.posts_list') }}" class="header__link">Posts</a></li>
+                            <li><a href="{{ url_for('users.login') }}" class="header__link">Login</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -41,7 +41,7 @@
 <!-- MAIN -->
             <main class="main">
                 <div class="search">
-                    <form action="{{ url_for('post.search') }}" method="get">
+                    <form action="{{ url_for('posts.search') }}" method="get">
                         <input type="text" class="search" name="q" placeholder="Keywords...">
                         <input type="submit" value="search">
                     </form>

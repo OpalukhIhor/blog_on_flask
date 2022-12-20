@@ -4,7 +4,7 @@
 <div class="account">
     <div class="account__header">
         <h1>You sign in as {{ current_user.username }}</h1>
-        <p>If it's not your account, please <a href="{{ url_for('user.logout') }}">logout</a>.
+        <p>If it's not your account, please <a href="{{ url_for('users.logout') }}">logout</a>.
             And sign in with your personal data
         </p>
     </div>
@@ -13,7 +13,7 @@
             <h2>Users list:</h2>
             <ul>
                 {% for user in users %}
-                <li><a href="{{ url_for('user.user_posts', username=user.username) }}">{{ user.username }}</a></li>
+                <li><a href="{{ url_for('users.user_posts', username=user.username) }}">{{ user.username }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -21,7 +21,7 @@
             <h2>Posts list:</h2>
             <ol>
                 {% for post in user.posts %}
-                <li><a href="{{ url_for('post.post', post_id=post.id) }}">{{ post.title }}</a></li>
+                <li><a href="{{ url_for('posts.post', slug=post.slug) }}">{{ post.title }}</a></li>
                 {% endfor %}
             </ol>
         </div>
